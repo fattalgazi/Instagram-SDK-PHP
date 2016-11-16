@@ -47,11 +47,11 @@ class Constants {
     /*
      * Your Timezone
      */
-    const TIMEZONE = "Pacific/Auckland";
+    const TIMEZONE = "Europe/Istanbul";
 
     /*
      * Your Timezone Offset
      */
-    const TIMEZONE_OFFSET = 43200;
+    const TIMEZONE_OFFSET = 10800;
 
 }
