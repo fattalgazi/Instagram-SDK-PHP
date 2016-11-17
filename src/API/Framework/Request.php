@@ -206,6 +206,7 @@ abstract class Request {
                 $data = $curl->get($this->getUrl(), $this->getParams());
 
                 if($curl->curlError){
+                    $curl->close();
                     throw new InstagramException(sprintf($error_format, "GET", $this->getUrl(), $curl->errorMessage));
                 }
 
@@ -218,6 +219,7 @@ abstract class Request {
                 $data = $curl->post($this->getUrl(), $this->getParams());
 
                 if($curl->curlError){
+                    $curl->close();
                     throw new InstagramException(sprintf($error_format, "POST", $this->getUrl(), $curl->errorMessage));
                 }
 
@@ -226,11 +228,13 @@ abstract class Request {
             }
 
             default: {
+                $curl->close();
                 throw new InstagramException(sprintf($error_format, "UNKNOWN", $this->getUrl(), "Unsupported Request Method"));
             }
 
         }
-
+        
+        $curl->close();
         return new Response($curl, $data);
 
     }
